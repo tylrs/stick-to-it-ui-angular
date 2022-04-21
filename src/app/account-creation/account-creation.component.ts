@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, RequiredValidator, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
+import { passwordValidator } from "../password-validator.directive";
 
 @Component({
   selector: "app-account-creation",
@@ -15,7 +16,7 @@ export class AccountCreationComponent implements OnInit {
       password: [""],
       passwordConfirmation: [""],
     },
-    { validators: Validators.required }
+    { validators: [passwordValidator, Validators.required] }
   );
 
   constructor(private formBuilder: FormBuilder) {}

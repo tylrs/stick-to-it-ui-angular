@@ -1,5 +1,14 @@
 <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-  <p *ngIf="accountForm.status">{{ accountForm.status }}</p>
+  <div
+    *ngIf="accountForm.errors?.['passwordsMatch'] && (accountForm.touched || accountForm.dirty)"
+  >
+    Passwords Must Match
+  </div>
+  <div
+    *ngIf="accountForm.controls['email'].errors?.['email'] && (accountForm.touched || accountForm.dirty)"
+  >
+    Email must have an email format
+  </div>
   <h2>Create An Account</h2>
 
   <label for="name-input">Full Name:</label>
