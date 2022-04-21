@@ -2,22 +2,28 @@
   <h2>Create An Account</h2>
 
   <label for="name-input">Full Name:</label>
-  <input id="name-input" type="text" formControlName="name" />
+  <input id="name-input" type="text" formControlName="name" required />
 
   <label for="username-input">Username:</label>
-  <input id="username-input" type="text" formControlName="username" />
+  <input id="username-input" type="text" formControlName="username" required />
 
   <label for="email-input">Email:</label>
-  <input id="email-input" type="email" formControlName="email" />
+  <input id="email-input" type="email" formControlName="email" required />
 
   <label for="password-input">Password:</label>
-  <input id="password-input" type="password" formControlName="password" />
+  <input
+    id="password-input"
+    type="password"
+    formControlName="password"
+    required
+  />
 
   <label for="password-confirmation-input">Password Confirmation:</label>
   <input
     id="password-confirmation-input"
     type="password"
     formControlName="passwordConfirmation"
+    required
   />
 
   <button type="submit">Create Account</button>
