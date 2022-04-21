@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-account-creation",
@@ -6,7 +7,19 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./account-creation.component.scss"],
 })
 export class AccountCreationComponent implements OnInit {
-  constructor() {}
+  accountForm = this.formBuilder.group({
+    name: [""],
+    username: [""],
+    email: [""],
+    password: [""],
+    passwordConfirmation: [""],
+  });
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  onSubmit() {
+    console.log(this.accountForm);
+  }
 
   ngOnInit(): void {}
 }
