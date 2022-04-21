@@ -5,6 +5,7 @@ import { AppComponent } from "./app.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { LoginComponent } from "./login/login.component";
 import { AccountCreationComponent } from "./account-creation/account-creation.component";
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { AccountCreationComponent } from "./account-creation/account-creation.co
     WelcomeComponent,
     LoginComponent,
     AccountCreationComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
