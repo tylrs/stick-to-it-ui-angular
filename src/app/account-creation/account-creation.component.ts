@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { interval, take, tap } from "rxjs";
 import { passwordValidator } from "../password-validator.directive";
 
 @Component({
@@ -25,5 +26,13 @@ export class AccountCreationComponent implements OnInit {
     console.log(this.accountForm);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("hello");
+    const obs = interval(1000).pipe(
+      take(5),
+      tap((i) => console.log(i))
+    );
+
+    obs.subscribe();
+  }
 }
