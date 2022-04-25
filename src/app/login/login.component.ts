@@ -1,12 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-
-interface AppState {
-  message: string;
-  loggedIn: boolean;
-}
+import { selectUser } from "../selectors/selectors";
+import { HttpService } from "../services/http.service";
+import { setUser } from "../state/users.actions";
+import { AppState } from "../types/types";
 
 @Component({
   selector: "app-login",
@@ -14,22 +12,31 @@ interface AppState {
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  loginForm = this.formBuilder.group(() => {
-    email: ["", Validators.email];
-    password: [""];
+  loginForm = this.formBuilder.group({
+    email: ["", Validators.email],
+    password: [""],
   });
-  isLoggedIn$: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>
-  ) {
-    this.isLoggedIn$ = this.store.select("loggedIn");
-  }
+    private store: Store<AppState>,
+    private http: HttpService
+  ) {}
 
   ngOnInit(): void {}
 
-  login() {
-    this.store.dispatch({ type: "LOGIN" });
+  submitCredentials() {
+    this.http
+      .login({
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password,
+      })
+      .subscribe((response: any) => {
+        console.log(response);
+        this.store.dispatch(setUser({ user: response.user }));
+        this.store.select(selectUser).subscribe((data) => {
+          console.log(data);
+        });
+      });
   }
 }

@@ -18,14 +18,15 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   createUser(accountInfo: AccountInfo) {
-    console.log(accountInfo);
-    return this.http
-      .post(urls.localUsers, accountInfo)
-      .pipe(catchError(this.handleError));
+    return this.http.post(urls.localUsers, accountInfo);
+  }
+
+  login(credentials: { email: string; password: string }) {
+    console.log(credentials);
+    return this.http.post(urls.localLogin, credentials);
   }
 
   handleError(error: HttpErrorResponse): any {
-    console.log("hello");
-    console.error(error.error.message);
+    console.log("Error", error.error.message);
   }
 }

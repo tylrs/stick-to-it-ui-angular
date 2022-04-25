@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { interval, take, tap } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { passwordValidator } from "../password-validator.directive";
 import { HttpService } from "../services/http.service";
 
@@ -24,17 +24,16 @@ export class AccountCreationComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private http: HttpService) {}
 
   onSubmit() {
-    let result = this.http.createUser(this.accountForm.value);
-    console.log(result);
+    this.http.createUser(this.accountForm.value).subscribe();
+    this.http
+      .login({
+        email: this.accountForm.value.email,
+        password: this.accountForm.value.password,
+      })
+      .subscribe((response: any) => {
+        console.log(response.token, response.user);
+      });
   }
 
-  ngOnInit(): void {
-    console.log("hello");
-    const obs = interval(1000).pipe(
-      take(5),
-      tap((i) => console.log(i))
-    );
-
-    obs.subscribe();
-  }
+  ngOnInit(): void {}
 }

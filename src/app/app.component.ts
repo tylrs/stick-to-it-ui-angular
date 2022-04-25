@@ -1,11 +1,8 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-
-interface AppState {
-  message: string;
-  loggedIn: boolean;
-}
+import { selectUser } from "./selectors/selectors";
+import { UserType } from "./types/types";
 
 @Component({
   selector: "app-root",
@@ -14,17 +11,9 @@ interface AppState {
 })
 export class AppComponent {
   title = "stick-to-it-ui-angular";
-  message$: Observable<string>;
+  user$: Observable<UserType> = this.store.select(selectUser);
 
-  constructor(private store: Store<AppState>) {
-    this.message$ = this.store.select("message");
-  }
-
-  greetingMessage() {
-    this.store.dispatch({ type: "GREETING" });
-  }
-
-  farewellMessage() {
-    this.store.dispatch({ type: "FAREWELL" });
+  constructor(private store: Store<{ user: UserType }>) {
+    // this.user$ = store.select(selectUser);
   }
 }

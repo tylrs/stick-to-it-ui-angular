@@ -1,13 +1,11 @@
-<form [formGroup]="loginForm" (submit)="login()">
-  <p>{{ isLoggedIn$ | async }}</p>
-
+<form [formGroup]="loginForm" (submit)="submitCredentials()">
   <h2>Login:</h2>
 
   <label for="email">Email:</label>
   <input id="email" type="email" formControlName="email" required />
 
-  <label for="passwod">Password:</label>
-  <input id="passwod" type="password" formControlName="password" required />
+  <label for="password">Password:</label>
+  <input id="password" type="password" formControlName="password" required />
 
   <button type="submit">Login</button>
 </form>
