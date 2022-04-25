@@ -1,4 +1,9 @@
 <app-header></app-header>
 <main>
   <router-outlet></router-outlet>
+
+  {{ message$ | async }}
+
+  <button (click)="greetingMessage()">Greeting Button</button>
+  <button (click)="farewellMessage()">Farewell Button</button>
 </main>

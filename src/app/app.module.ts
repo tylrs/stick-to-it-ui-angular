@@ -7,6 +7,10 @@ import { LoginComponent } from "./login/login.component";
 import { AccountCreationComponent } from "./account-creation/account-creation.component";
 import { HeaderComponent } from "./header/header.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { StoreModule } from "@ngrx/store";
+import { basicReducer } from "./basic-reducer";
+import { loginReducer } from "./login-reducer";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,7 +20,13 @@ import { ReactiveFormsModule } from "@angular/forms";
     AccountCreationComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    StoreModule.forRoot({ message: basicReducer, loggedIn: loginReducer }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

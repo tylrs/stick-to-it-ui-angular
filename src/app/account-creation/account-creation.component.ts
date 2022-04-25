@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { interval, take, tap } from "rxjs";
 import { passwordValidator } from "../password-validator.directive";
+import { HttpService } from "../services/http.service";
 
 @Component({
   selector: "app-account-creation",
@@ -20,10 +21,11 @@ export class AccountCreationComponent implements OnInit {
     { validators: [passwordValidator, Validators.required] }
   );
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private http: HttpService) {}
 
   onSubmit() {
-    console.log(this.accountForm);
+    let result = this.http.createUser(this.accountForm.value);
+    console.log(result);
   }
 
   ngOnInit(): void {
