@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import { loginReducer } from "./reducers/login.reducer";
 import { HttpClientModule } from "@angular/common/http";
+import { HabitsListComponent } from './habits-list/habits-list.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from "@angular/common/http";
     LoginComponent,
     AccountCreationComponent,
     HeaderComponent,
+    HabitsListComponent,
   ],
   imports: [
     BrowserModule,

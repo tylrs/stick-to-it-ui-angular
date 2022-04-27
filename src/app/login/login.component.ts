@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
-import { selectUser } from "../selectors/selectors";
 import { HttpService } from "../services/http.service";
+import { TokenService } from "../services/token.service";
 import { setUser } from "../state/users.actions";
 import { AppState } from "../types/types";
 
@@ -20,7 +21,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private http: HttpService
+    private http: HttpService,
+    private tokenService: TokenService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -34,9 +37,8 @@ export class LoginComponent implements OnInit {
       .subscribe((response: any) => {
         console.log(response);
         this.store.dispatch(setUser({ user: response.user }));
-        this.store.select(selectUser).subscribe((data) => {
-          console.log(data);
-        });
+        this.tokenService.storeToken(response.token);
+        this.router.navigateByUrl("");
       });
   }
 }
