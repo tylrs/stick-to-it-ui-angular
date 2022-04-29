@@ -22,7 +22,6 @@ export class HttpService {
   }
 
   login(credentials: { email: string; password: string }) {
-    console.log(credentials);
     return this.http.post(urls.localLogin, credentials);
   }
 

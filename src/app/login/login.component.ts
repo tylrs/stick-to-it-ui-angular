@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         console.log(response);
         this.store.dispatch(setUser({ user: response.user }));
         this.tokenService.storeToken(response.token);
-        this.router.navigateByUrl("");
+        this.router.navigateByUrl("/habits-list");
       });
   }
 }
